@@ -7,7 +7,16 @@ const upload = multer({ dest: `/upload/images` });
 const cloudinary = require(`cloudinary`).v2;
 const port = 3200;
 const db = require(`./database`);
+const nodemailer = require(`nodemailer`);
 require(`dotenv`).config();
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL,
+    pass: process.env.GMAILPASS,
+  }
+})
 
 cloudinary.config({
   cloud_name: process.env.CLOUDNAME,
